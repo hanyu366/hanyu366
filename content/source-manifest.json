@@ -2,23 +2,23 @@
   "documents": [
     {
       "file": "00_作品集首页.md",
-      "sha256": "b0545880d89813372d02eae6d36b0fac5f2dafbbd306ecaa7090e02fa1d387d6"
+      "sha256": "c2360f06c9dad2f2e65b1bdc0f082fa5d0882fa3a3857ab0208cffa8a8199719"
     },
     {
       "file": "01_素材经营与生产协同平台.md",
-      "sha256": "d75b4484e0d9f74805774b97b199bfa9d9517efb1597cdd731953340815a0b26"
+      "sha256": "485efaaa55351cb33d13f4ba2c5b7c89d0c304e4f3a762b2c4b6dff893847fe1"
     },
     {
       "file": "05_AI内容审核系统.md",
-      "sha256": "9c4991d402160d29d45e869ad0f27b258af38c08624a066d506ec5ffabbebaf6"
+      "sha256": "6b4c2d4a5c5e4098011dd2676240fb1e92e9b26589fb6fe7355b55ddcc6e39d1"
     },
     {
       "file": "06_多模态AI素材诊断.md",
-      "sha256": "2f44ea8cbfcfb8eb6eedd842499cddb6010ec2e62d7bc7c11aaafe5190265b81"
+      "sha256": "5c4291b5fee93acb186c0942cca4c621b2be12dd79e0c46a1da7592748e7ec49"
     },
     {
       "file": "07_AI书单导入工作流.md",
-      "sha256": "52253c22866a630c116e36f1af6a9dac60aa8cd9fbb3c4e42e0c8c393912dfa0"
+      "sha256": "3d56d72ce2e6f3b75ee6bf0609f7e78a4413d09b43148867e12ff8be64030b20"
     },
     {
       "file": "09_信奥RAG引导式答疑.md",
@@ -26,7 +26,7 @@
     },
     {
       "file": "03_DormMate_AI.md",
-      "sha256": "9230c2fbfeb98977dd58f420b2f1142d55f8b830f3101075f95bbda0fea27a69"
+      "sha256": "c5e2b945ce6c9c8dfc55fb0aea2dcb575ec2c22e882208213abe7d2efd8e9f02"
     },
     {
       "file": "02_Zotero论文预读助手.md",

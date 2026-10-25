@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const content = path.join(root, 'content');
 const out = path.join(root, 'dist');
 const base = process.env.SITE_BASE || site.base;
+const styleVersion = createHash('sha256').update(await readFile(path.join(root, 'web/site.css'))).digest('hex').slice(0, 12);
 if (!/^\/(?:[a-z0-9-]+\/)*$/i.test(base)) throw new Error('Invalid site base');
 const route = page => base + (page.slug ? page.slug + '/' : '');
 const escape = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -67,13 +68,13 @@ function makeRenderer() {
 }
 
 function nav(current) {
-  return `<header class="site-header"><div class="header-inner"><a class="brand" href="${base}" aria-label="${site.name}，作品集首页"><span class="brand-mark" aria-hidden="true">L</span><span>${site.name}</span><span class="brand-role">/ 产品与实践</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" type="button"><span>导航</span><span aria-hidden="true">☰</span></button><nav id="primary-nav" aria-label="主导航"><a href="${base}#company-projects"${current === 'company' || current === 'home' ? ' class="active"' : ''}>公司项目</a><a href="${base}#personal-projects"${current === 'personal' ? ' class="active"' : ''}>个人项目</a><a href="${base}resume/"${current === 'resume' ? ' class="active" aria-current="page"' : ''}>个人简历 <span aria-hidden="true">↗</span></a></nav></div></header>`;
+  return `<header class="site-header"><div class="header-inner"><a class="brand" href="${base}" aria-label="${site.name}，作品集首页"><span>${site.name}</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" type="button"><span>导航</span><span aria-hidden="true">☰</span></button><nav id="primary-nav" aria-label="主导航"><a href="${base}#company-projects"${current === 'company' || current === 'home' ? ' class="active"' : ''}>公司项目</a><a href="${base}#personal-projects"${current === 'personal' ? ' class="active"' : ''}>个人项目</a><a href="${base}resume/"${current === 'resume' ? ' class="active" aria-current="page"' : ''}>个人简历 <span aria-hidden="true">↗</span></a></nav></div></header>`;
 }
 
 function shell(page, title, description, main, { diagrams = false } = {}) {
   const canonical = site.origin + route(page);
   return `<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#f7f8fa"><title>${escape(title)}${page.kind === 'home' ? '' : ` · ${site.name}`}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_CN"><meta property="og:url" content="${canonical}"><link rel="icon" type="image/svg+xml" href="${base}assets/favicon.svg"><link rel="stylesheet" href="${base}assets/site.css"><script src="${base}assets/site.js" defer></script>${diagrams ? `<script src="${base}assets/mermaid.min.js" defer></script>` : ''}</head>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#fafaf9"><title>${escape(title)}${page.kind === 'home' ? '' : ` · ${site.name}`}</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${canonical}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_CN"><meta property="og:url" content="${canonical}"><link rel="icon" type="image/svg+xml" href="${base}assets/favicon.svg"><link rel="stylesheet" href="${base}assets/site.css?v=${styleVersion}"><script src="${base}assets/site.js" defer></script>${diagrams ? `<script src="${base}assets/mermaid.min.js" defer></script>` : ''}</head>
 <body class="${page.kind === 'home' ? 'home-page' : 'detail-page'}"><a class="skip-link" href="#main">跳至正文</a>${nav(page.kind)}${main}<footer class="site-footer"><div><a href="${base}">${site.name}</a><span>AI 产品经理作品集</span></div><a href="#top" class="back-top">返回顶部 ↑</a></footer><dialog id="image-dialog" aria-label="图片大图"><button class="dialog-close" type="button" aria-label="关闭大图">关闭 ×</button><div class="dialog-image"></div><p class="dialog-caption"></p></dialog></body></html>`;
 }
 
@@ -114,10 +115,24 @@ function renderHome(page, markdown) {
   const subtitle = introTokens.find(token => token.raw.startsWith('**'));
   const intro = introTokens.find(token => !token.raw.startsWith('**') && !token.raw.startsWith('['));
   const groups = getHomeRecords(tokens);
-  const directory = tokens.find(token => token.type === 'table');
-  const projectIndex = directory.rows.map((row, index) => `<li><span class="index-number">${String(index + 1).padStart(2, '0')}</span><div>${marked.parseInline(row[1].text)}<span class="index-context">${escape(row[0].text)}</span></div><span class="index-arrow" aria-hidden="true">↗</span></li>`).join('');
-  const main = `<main id="main"><div id="top"></div><section class="hero page-width"><div class="hero-copy"><div class="eyebrow"><span class="small-dot"></span> PORTFOLIO <span class="eyebrow-year">2026</span></div><h1 aria-label="${escape(identity)}"><span class="hero-name">${site.name}</span><span class="hero-role"><span class="hero-divider">｜</span>${site.role}</span></h1><div class="hero-subtitle">${marked.parser([subtitle])}</div><div class="hero-intro">${marked.parser([intro])}</div><div class="hero-actions"><a class="button button-primary" href="#company-projects">浏览公司项目 <span aria-hidden="true">↓</span></a><a class="text-link" href="${base}resume/">查看个人简历 <span aria-hidden="true">↗</span></a></div></div><aside class="project-index" aria-label="作品目录"><div class="index-heading"><h2>作品目录</h2><span>01 — 07</span></div><ol>${projectIndex}</ol></aside></section><section id="company-projects" class="project-section page-width"><div class="section-heading"><div><span class="eyebrow">COMPANY PROJECTS</span><h2>公司项目<span class="section-count">05</span></h2></div><span class="section-note">业务需求 / 产品决策 / 迭代与交付</span></div>${renderCard(groups.company[0], 1, 'featured platform-card')}<div class="company-grid">${groups.company.slice(1).map((record, index) => renderCard(record, index + 2)).join('')}</div></section><section id="personal-projects" class="project-section personal-section page-width"><div class="section-heading"><div><span class="eyebrow">PERSONAL PROJECTS</span><h2>个人项目<span class="section-count">02</span></h2></div><span class="section-note">从自身需求出发，完成产品实践</span></div>${renderCard(groups.personal[0], 6, 'featured dormmate-card')}${renderCard(groups.personal[1], 7, 'compact-card')}</section></main>`;
-  return shell(page, identity, bare(intro.text), main);
+  const main = `<main id="main"><div id="top"></div>
+<section class="hero page-width"><div class="hero-copy">
+<h1>${escape(identity)}</h1>
+<div class="hero-subtitle">${marked.parser([subtitle])}</div>
+<div class="hero-intro">${marked.parser([intro])}</div>
+<div class="hero-actions"><a class="button button-primary" href="#company-projects">浏览项目 <span aria-hidden="true">↓</span></a><a class="text-link" href="${base}resume/">个人简历 <span aria-hidden="true">↗</span></a></div>
+</div></section>
+<section id="company-projects" class="project-section page-width">
+<div class="section-heading"><h2>公司项目<span class="section-count">05</span></h2></div>
+${renderCard(groups.company[0], 1, 'featured platform-card')}
+<div class="company-grid">${groups.company.slice(1).map((record, index) => renderCard(record, index + 2)).join('')}</div>
+</section>
+<section id="personal-projects" class="project-section personal-section page-width">
+<div class="section-heading"><h2>个人项目<span class="section-count">02</span></h2></div>
+${renderCard(groups.personal[0], 6, 'featured dormmate-card')}
+${renderCard(groups.personal[1], 7, 'compact-card')}
+</section></main>`;
+  return shell(page, identity + '｜' + site.role, bare(intro.text), main);
 }
 
 function renderArticle(page, markdown) {
@@ -136,7 +151,7 @@ function renderArticle(page, markdown) {
   const category = page.kind === 'company' ? '公司项目' : page.kind === 'personal' ? '个人项目' : '个人简历';
   const toc = headings.filter(heading => heading.depth === 2).map(heading => `<a href="#${escape(heading.id)}">${escape(heading.text)}</a>`).join('');
   const related = page.kind === 'resume' ? pages.filter(item => item.kind === 'company').slice(0, 3) : pages.filter(item => item.kind === page.kind && item !== page).slice(0, 2);
-  const main = `<main id="main"><div id="top"></div><header class="article-header page-width"><div class="breadcrumb"><a href="${base}">作品集</a><span>/</span><span>${category}</span></div><div class="article-label"><span class="small-dot"></span>${page.tag || 'RESUME'}</div><h1>${escape(title)}</h1>${subtitle ? `<p class="article-subtitle">${escape(subtitle.text)}</p>` : ''}<div class="article-meta">${meta ? marked.parser([meta]) : ''}</div>${introHtml ? `<div class="article-intro prose">${introHtml}</div>` : ''}${page.kind === 'resume' ? '<button class="print-button" type="button">打印 / 保存 PDF <span aria-hidden="true">↗</span></button>' : ''}</header><div class="article-layout page-width"><aside class="article-toc" aria-label="本文目录"><div class="toc-heading">本文目录<span aria-hidden="true">↘</span></div><nav>${toc}</nav><a class="toc-return" href="${base}">← 返回作品集</a></aside><article class="article-body prose">${body}<section class="related-projects" aria-label="继续阅读"><p class="eyebrow">继续阅读</p>${related.map(item => `<a href="${route(item)}"><span>${escape(item.label)}</span><span aria-hidden="true">↗</span></a>`).join('')}</section></article></div></main>`;
+  const main = `<main id="main"><div id="top"></div><header class="article-header page-width"><div class="breadcrumb"><a href="${base}">作品集</a><span>/</span><span>${category}</span></div><div class="article-label"><span class="small-dot"></span>${page.tag || '个人简历'}</div><h1>${escape(title)}</h1>${subtitle ? `<p class="article-subtitle">${escape(subtitle.text)}</p>` : ''}<div class="article-meta">${meta ? marked.parser([meta]) : ''}</div>${introHtml ? `<div class="article-intro prose">${introHtml}</div>` : ''}${page.kind === 'resume' ? '<button class="print-button" type="button">打印 / 保存 PDF <span aria-hidden="true">↗</span></button>' : ''}</header><div class="article-layout page-width"><aside class="article-toc" aria-label="本文目录"><div class="toc-heading">本文目录<span aria-hidden="true">↘</span></div><nav>${toc}</nav><a class="toc-return" href="${base}">← 返回作品集</a></aside><article class="article-body prose">${body}<section class="related-projects" aria-label="继续阅读"><p class="eyebrow">继续阅读</p>${related.map(item => `<a href="${route(item)}"><span>${escape(item.label)}</span><span aria-hidden="true">↗</span></a>`).join('')}</section></article></div></main>`;
   return shell(page, title, bare(introTokens.map(token => token.text || '').join(' ')).slice(0, 200), main, { diagrams: /```mermaid/.test(markdown) });
 }
 

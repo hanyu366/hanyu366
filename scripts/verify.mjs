@@ -41,8 +41,7 @@ for (const page of pages) {
       assert.ok(actualText.includes(expectedText), `Missing or changed source block in ${page.file}: ${expectedText.slice(0, 95)}`);
       checkedBlocks++;
     } else if (token.type === 'table') {
-      // The home directory is presented as an ordered index, without table-column labels.
-      for (const cell of [...(page.kind === 'home' ? [] : token.header), ...token.rows.flat()]) {
+      for (const cell of [...token.header, ...token.rows.flat()]) {
         const expectedText = normal(plain(marked.parseInline(cell.text)));
         assert.ok(actualText.includes(expectedText), `Missing table cell in ${page.file}: ${expectedText}`);
         checkedBlocks++;
