@@ -1,0 +1,49 @@
+{
+  "documents": [
+    {
+      "file": "00_作品集首页.md",
+      "sha256": "b0545880d89813372d02eae6d36b0fac5f2dafbbd306ecaa7090e02fa1d387d6"
+    },
+    {
+      "file": "01_素材经营与生产协同平台.md",
+      "sha256": "d75b4484e0d9f74805774b97b199bfa9d9517efb1597cdd731953340815a0b26"
+    },
+    {
+      "file": "05_AI内容审核系统.md",
+      "sha256": "9c4991d402160d29d45e869ad0f27b258af38c08624a066d506ec5ffabbebaf6"
+    },
+    {
+      "file": "06_多模态AI素材诊断.md",
+      "sha256": "2f44ea8cbfcfb8eb6eedd842499cddb6010ec2e62d7bc7c11aaafe5190265b81"
+    },
+    {
+      "file": "07_AI书单导入工作流.md",
+      "sha256": "52253c22866a630c116e36f1af6a9dac60aa8cd9fbb3c4e42e0c8c393912dfa0"
+    },
+    {
+      "file": "09_信奥RAG引导式答疑.md",
+      "sha256": "5e8dfe8724a4deecaa34167cb492b8a24f5bd20c2ff308f8e1ed04ec10bc7d1d"
+    },
+    {
+      "file": "03_DormMate_AI.md",
+      "sha256": "9230c2fbfeb98977dd58f420b2f1142d55f8b830f3101075f95bbda0fea27a69"
+    },
+    {
+      "file": "02_Zotero论文预读助手.md",
+      "sha256": "b2a7e9d228cc0e3a83b61ea3678f22626a9d822d35170f9d7a35629bc4750097"
+    },
+    {
+      "file": "04_简历摘要.md",
+      "sha256": "eca0568ff404255c3e2f7156d7459fe90bc5a7462a732f654fd0c222636172c8"
+    }
+  ],
+  "assets": [
+    "assets/dormmate-board.png",
+    "assets/dormmate-drying.png",
+    "assets/dormmate-duty.png",
+    "assets/dormmate-expense.png",
+    "assets/dormmate-join.png",
+    "assets/platform-overview.png",
+    "assets/zotero-annotations.png"
+  ]
+}

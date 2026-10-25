@@ -1,52 +1,91 @@
-<div align="center">
-
 # 赖韦寒雨｜AI 产品经理
 
-把复杂业务拆成规则、模型与人工协同流程，并用 AI Coding 快速完成可验证的产品原型。
+**武汉大学硕士在读 · AI 应用 / B 端产品实践**
 
-*AI Product Manager focused on workflow design, RAG, evaluation, human-in-the-loop systems, and rapid prototyping.*
+[浏览网页作品集 →](https://hanyu366.github.io/hanyu366/)
 
-</div>
+[个人简历](https://hanyu366.github.io/hanyu366/resume/)
 
-## 我在做什么
+这里整理我的公司项目与个人项目，记录具体问题、关键决策、实现过程和迭代依据。
 
-- 从真实业务问题出发，识别哪些环节适合规则、模型或人工判断
-- 设计 AI Workflow、RAG、Prompt、Evaluation 与 Bad Case 迭代机制
-- 用 Python、TypeScript 和 AI Coding 把方案快速做成可交互 Demo
-- 关注解释性、可控性和人工确认，不把“接入模型”等同于“问题已解决”
+## 作品目录
 
-```mermaid
-flowchart LR
-    A[业务问题] --> B[用户与流程拆解]
-    B --> C[规则 / 模型 / 人工边界]
-    C --> D[快速原型]
-    D --> E[测试与 Bad Case]
-    E --> F[迭代与交付]
-```
-
-## 代表作品
-
-| 项目 | 解决的问题 | 能力体现 |
-| --- | --- | --- |
-| [DormBuild](https://github.com/hanyu366/DormBuild) | 将宿舍费用、值日、公约、投票和沟通收敛到统一工作台 | B 端流程抽象、全栈原型、AI 事务入口 |
-| [AI 机票决策助手](https://github.com/hanyu366/meituan-html-demo) | 帮助用户理解票面价格之外的行李、退改、时间和机场成本 | 决策型产品设计、解释型推荐、交互原型 |
-| [Zotero AI Preread](https://github.com/hanyu366/zotero-ai-preread) | 围绕研究问题生成可审查的论文预读批注计划 | 科研工作流、结构化输出、人机确认边界 |
-| [Week Work Report](https://github.com/hanyu366/week-work-report) | 把组会 PPT 转为经确认的中英文科研周报和 Word 文档 | 多阶段 Workflow、证据约束、格式化交付 |
-
-## 产品与技术能力
-
-| 方向 | 能力与工具 |
+| 类别 | 项目 |
 | --- | --- |
-| AI 产品 | LLM 应用设计、RAG、Prompt / Workflow、AI Evaluation、Human-in-the-loop、Bad Case 分析 |
-| 产品设计 | 用户研究、需求分析、复杂业务抽象、B 端流程、PRD、原型与指标设计 |
-| 快速验证 | Python、TypeScript、React、API、数据库、AI Coding |
-| 工作原则 | 证据优先、边界清晰、先验证后扩展、保留人工确认 |
+| 公司项目 · 优矩互动 | [素材经营与生产协同平台](https://hanyu366.github.io/hanyu366/production-platform/) |
+| 公司项目 · 优矩互动 | [AI 内容审核系统](https://hanyu366.github.io/hanyu366/content-review/) |
+| 公司项目 · 优矩互动 | [多模态 AI 素材诊断](https://hanyu366.github.io/hanyu366/multimodal-diagnosis/) |
+| 公司项目 · 武汉智创未来 | [AI 书单导入工作流](https://hanyu366.github.io/hanyu366/book-import/) |
+| 公司项目 · 武汉智创未来 | [信奥 RAG 引导式答疑](https://hanyu366.github.io/hanyu366/rag-tutoring/) |
+| 个人项目 | [DormMate AI](https://hanyu366.github.io/hanyu366/dormmate/) |
+| 个人项目 | [Zotero 论文预读助手](https://hanyu366.github.io/hanyu366/zotero-preread/) |
 
-## 项目组合
+## 公司项目
 
-- **协作型产品**：DormBuild 验证多人事务、状态流转与通知机制
-- **决策型产品**：AI 机票决策助手验证推荐解释与多方案比较
-- **知识工作流**：Zotero AI Preread 验证从非结构化文档到可审查输出
-- **Agent 工作流**：Week Work Report 验证分阶段生成、人工确认与格式化交付
+### 素材经营与生产协同平台
 
-> 这里展示的是可阅读、可运行或可验证的个人项目。仓库 README 会说明真实功能、运行方式与当前边界。
+**优矩互动 · 2026.05—2026.08 · B 端平台建设**
+
+围绕素材、投放记录、人员与任务建立业务关系，从 0 到 1 推进管理侧和一线侧工作台，将经营下钻、个人表现与任务协同连接起来。
+
+平台覆盖 40+ 人，活跃人数按一个月周期统计；据管理者口述估算，人均每周减少约 4–5 小时数据整理与查找工作。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/production-platform/)
+
+### AI 内容审核系统
+
+**优矩互动 · AI 工作流设计与迭代**
+
+针对广告素材脚本与场景、功能标签的一致性，设计规则、模型与人工协作的审核流程：程序检查明确条件，模型判断语义关系，证据不足时转人工确认；将高频变化的标签定义与规则配置化。
+
+覆盖 30+ 人，连续运行约 2 个月；参与审核人员每人每周的审核全流程耗时由 4–5 小时缩短至 1 小时以内。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/content-review/)
+
+### 多模态 AI 素材诊断
+
+**优矩互动 · 嵌入协同平台的诊断功能**
+
+将专家复盘拆成素材事实、本地化适配、产品价值、表达执行与问题排序，保留最值得优先修改的 1–2 个问题，经专家审核后用于一线复盘。
+
+日均完成约 20 条素材的 AI 复盘，业务侧逐条评定，约 75% 的结果具有参考价值。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/multimodal-diagnosis/)
+
+### AI 书单导入工作流
+
+**武汉智创未来教育科技有限公司 · 2026.01—2026.03**
+
+独立负责书单导入这一产品功能，与技术和业务协作，设计先查旧库、再检索补全、最后校验入库的半自动流程，对身份、内容、时效字段分别制定处理策略。
+
+流程连续运行约 4–5 周，支撑 10+ 批次主题书单上线。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/book-import/)
+
+### 信奥 RAG 引导式答疑
+
+**武汉智创未来教育科技有限公司 · 信奥学习平台**
+
+参与自研信奥平台课后 RAG 答疑的产品方案与配置落地。针对缺少题号或术语不准确的提问，设计话题澄清、检索与分层提示，参与父子分块和召回配置，通过提示约束与输出检测控制答案泄露，已供学生实际使用。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/rag-tutoring/)
+
+## 个人项目
+
+### DormMate AI｜从宿舍协作需求到可运行产品原型
+
+**3 人团队 · 6 小时比赛原型**
+
+围绕群聊中分散的值日、费用与成员状态，统筹需求、方案、优先级和落地推进，与队友共同完成 PRD 与原型，使用 Claude Code 实现程序及 AI 调用。比赛版真实接入 DeepSeek，支持自然语言操作与看板状态回写，获武汉大学自强 Vibe Coding 挑战赛「潜力新锐奖」。
+
+比赛版包含值日、费用、成员状态、洗晒与费用月报展示，以模拟数据在本地跑通核心闭环，暂缓多账号登录、真实数据源接入与服务器部署。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/dormmate/) · [比赛版源码与运行说明](https://github.com/hanyu366/DormBuild/tree/1f701b78ffc421f1e1c7396f3f480b1452ad01f1/competition-demo)
+
+### Zotero 论文预读助手｜围绕研究问题开展多轮阅读
+
+**个人项目 · 独立设计与实现**
+
+从自身科研阅读需求出发，独立实现按研究目标开展 AI 全文预读、定位原文并写回 Zotero 批注，支持批注管理与导出。
+
+[查看项目 →](https://hanyu366.github.io/hanyu366/zotero-preread/) · [源码与安装说明](https://hanyu366.github.iohttps://github.com/hanyu366/zotero-ai-preread/blob/81bd41224fd74cfe81fc6dc615d995542fd5a05f/README.md)
